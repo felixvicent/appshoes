@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
+import 'package:appshoes/views/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,21 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Minha Loja'),
-      ),
-      body: Center(
-        child: Text('Vamos desenvolver uma loja?'),
-      ),
+      home: ProductsOverviewScreen(),
     );
   }
 }
