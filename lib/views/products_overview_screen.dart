@@ -2,6 +2,7 @@
 
 import 'package:appshoes/data/dummy_data.dart';
 import 'package:appshoes/models/product.dart';
+import 'package:appshoes/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
 class ProductsOverviewScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class ProductsOverviewScreen extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
-        itemBuilder: (ctx, index) => Text(loadedProdutcs[index].title),
+        itemBuilder: (ctx, index) => ProductItem(loadedProdutcs[index]),
       ),
     );
   }
