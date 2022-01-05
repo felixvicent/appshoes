@@ -2,7 +2,7 @@
 
 import 'package:appshoes/models/product.dart';
 
-final DUMMY_PRODUTCTS = [
+final DUMMY_PRODUCTS = [
   Product(
     id: 'p1',
     title: 'Red Shirt',
