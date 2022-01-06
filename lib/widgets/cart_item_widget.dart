@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, unnecessary_string_interpolations
 
 import 'package:appshoes/providers/cart.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class CartItemWidget extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(5),
                 child: FittedBox(
-                  child: Text('${cartItem.price}'),
+                  child: Text('${cartItem.price.toStringAsFixed(2)}'),
                 ),
               ),
             ),
