@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, import_of_legacy_library_into_null_safe, constant_identifier_names, unused_local_variable, deprecated_member_use
 
 import 'package:appshoes/providers/cart.dart';
+import 'package:appshoes/utils/app_routes.dart';
 import 'package:appshoes/widgets/badge.dart';
 import 'package:appshoes/widgets/product_grid.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
           Consumer<Cart>(
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART);
+              },
               icon: Icon(Icons.shopping_cart),
             ),
             builder: (ctx, cart, child) => Badge(
