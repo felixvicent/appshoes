@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:appshoes/models/product.dart';
+import 'package:appshoes/providers/product.dart';
 
 final DUMMY_PRODUCTS = [
   Product(
