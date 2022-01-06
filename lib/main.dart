@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 
 import 'package:appshoes/providers/cart.dart';
+import 'package:appshoes/providers/orders.dart';
 import 'package:appshoes/providers/products.dart';
 import 'package:appshoes/utils/app_routes.dart';
 import 'package:appshoes/views/cart_screen.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Orders(),
         ),
       ],
       child: MaterialApp(
