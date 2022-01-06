@@ -2,6 +2,7 @@
 
 import 'package:appshoes/providers/cart.dart';
 import 'package:appshoes/utils/app_routes.dart';
+import 'package:appshoes/widgets/app_drawer.dart';
 import 'package:appshoes/widgets/badge.dart';
 import 'package:appshoes/widgets/product_grid.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       body: ProductGrid(_showFavoriteOnly),
+      drawer: AppDrawer(),
     );
   }
 }
