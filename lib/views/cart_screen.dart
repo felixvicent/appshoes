@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 
 import 'package:appshoes/providers/cart.dart';
+import 'package:appshoes/providers/orders.dart';
 import 'package:appshoes/widgets/cart_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +43,11 @@ class CartScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<Orders>(context, listen: false)
+                          .addOrder(cart);
+                      cart.clear();
+                    },
                     child: Text('COMPRAR'),
                     textColor: Theme.of(context).primaryColor,
                   ),
