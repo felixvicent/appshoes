@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unused_local_variable
 
 import 'package:appshoes/providers/products.dart';
+import 'package:appshoes/utils/app_routes.dart';
 import 'package:appshoes/widgets/app_drawer.dart';
 import 'package:appshoes/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,9 @@ class ProductsScreen extends StatelessWidget {
         title: Text('Gerenciar Produtos'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.PRODUCT_FORM);
+            },
             icon: Icon(Icons.add),
           ),
         ],
