@@ -8,6 +8,7 @@ import 'package:appshoes/views/cart_screen.dart';
 import 'package:appshoes/views/orders_screen.dart';
 import 'package:appshoes/views/product_detail_screen.dart';
 import 'package:appshoes/views/products_overview_screen.dart';
+import 'package:appshoes/views/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen(),
           AppRoutes.CART: (ctx) => CartScreen(),
           AppRoutes.ORDERS: (ctx) => OrderScreen(),
+          AppRoutes.PRODUCTS: (ctx) => ProductsScreen(),
         },
       ),
     );
