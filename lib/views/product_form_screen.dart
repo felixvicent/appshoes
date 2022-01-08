@@ -3,7 +3,9 @@
 import 'dart:math';
 
 import 'package:appshoes/providers/product.dart';
+import 'package:appshoes/providers/products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductFormScreen extends StatefulWidget {
   @override
@@ -66,6 +68,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
       description: _formData['description'] as String,
       imageUrl: _formData['imageUrl'] as String,
     );
+
+    Provider.of<Products>(context, listen: false).addProduct(newProduct);
+    Navigator.of(context).pop();
   }
 
   @override

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
+import 'dart:math';
+
 import 'package:appshoes/data/dummy_data.dart';
 import 'package:appshoes/providers/product.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +19,14 @@ class Products with ChangeNotifier {
     return _items.where((product) => product.isFavorite).toList();
   }
 
-  void addProduct(Product product) {
-    _items.add(product);
+  void addProduct(Product newProduct) {
+    _items.add(Product(
+      id: Random().nextDouble().toString(),
+      title: newProduct.title,
+      description: newProduct.description,
+      price: newProduct.price,
+      imageUrl: newProduct.imageUrl,
+    ));
     notifyListeners();
   }
 }
