@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, unnecessary_null_comparison
 
 import 'dart:math';
 
@@ -28,5 +28,18 @@ class Products with ChangeNotifier {
       imageUrl: newProduct.imageUrl,
     ));
     notifyListeners();
+  }
+
+  void updateProduct(Product product) {
+    if (product == null && product.id == null) {
+      return;
+    }
+
+    final index = _items.indexWhere((prod) => prod.id == product.id);
+
+    if (index >= 0) {
+      _items[index] = product;
+      notifyListeners();
+    }
   }
 }

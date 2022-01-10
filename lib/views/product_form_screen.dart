@@ -1,7 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_collection_literals
 
-import 'dart:math';
-
 import 'package:appshoes/providers/product.dart';
 import 'package:appshoes/providers/products.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +22,21 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   void initState() {
     super.initState();
     _imageUrlFocusNode.addListener(_updateImage);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_formData.isEmpty) {
+      final product = ModalRoute.of(context)!.settings.arguments as Product;
+      _formData['id'] = product.id;
+      _formData['title'] = product.title;
+      _formData['description'] = product.description;
+      _formData['price'] = product.price;
+      _formData['imageUrl'] = product.imageUrl;
+
+      _imageUrlController.text = _formData['imageUrl'] as String;
+    }
   }
 
   void _updateImage() {
@@ -61,15 +74,22 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     }
 
     _form.currentState!.save();
-    final newProduct = Product(
-      id: Random().nextDouble().toString(),
+
+    final product = Product(
+      id: _formData['id'] as String,
       title: _formData['title'] as String,
       price: _formData['price'] as double,
       description: _formData['description'] as String,
       imageUrl: _formData['imageUrl'] as String,
     );
 
-    Provider.of<Products>(context, listen: false).addProduct(newProduct);
+    final products = Provider.of<Products>(context, listen: false);
+
+    if (_formData['id'] == null) {
+      products.addProduct(product);
+    } else {
+      products.updateProduct(product);
+    }
     Navigator.of(context).pop();
   }
 
@@ -92,6 +112,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
           child: ListView(
             children: [
               TextFormField(
+                initialValue: _formData['title'] as String,
                 decoration: InputDecoration(
                   labelText: 'Título',
                 ),
@@ -109,6 +130,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               TextFormField(
+                initialValue: _formData['price'].toString(),
                 decoration: InputDecoration(labelText: 'Preço'),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 textInputAction: TextInputAction.next,
@@ -128,6 +150,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               TextFormField(
+                initialValue: _formData['description'] as String,
                 decoration: InputDecoration(labelText: 'Descrição'),
                 keyboardType: TextInputType.multiline,
                 maxLines: 3,
