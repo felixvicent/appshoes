@@ -1,8 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:appshoes/providers/product.dart';
+import 'package:appshoes/providers/products.dart';
 import 'package:appshoes/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -31,7 +33,10 @@ class ProductItem extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<Products>(context, listen: false)
+                    .deleteProduct(product.id);
+              },
               icon: Icon(Icons.delete),
               color: Theme.of(context).errorColor,
             ),
