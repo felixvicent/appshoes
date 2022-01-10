@@ -28,14 +28,19 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_formData.isEmpty) {
-      final product = ModalRoute.of(context)!.settings.arguments as Product;
-      _formData['id'] = product.id;
-      _formData['title'] = product.title;
-      _formData['description'] = product.description;
-      _formData['price'] = product.price;
-      _formData['imageUrl'] = product.imageUrl;
+      final product = ModalRoute.of(context)!.settings.arguments as Product?;
 
-      _imageUrlController.text = _formData['imageUrl'] as String;
+      if (product != null) {
+        _formData['id'] = product.id;
+        _formData['title'] = product.title;
+        _formData['description'] = product.description;
+        _formData['price'] = product.price;
+        _formData['imageUrl'] = product.imageUrl;
+
+        _imageUrlController.text = _formData['imageUrl'] as String;
+      } else {
+        _formData['price'] = '';
+      }
     }
   }
 
@@ -112,7 +117,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
           child: ListView(
             children: [
               TextFormField(
-                initialValue: _formData['title'] as String,
+                initialValue: _formData['title'] as String?,
                 decoration: InputDecoration(
                   labelText: 'Título',
                 ),
@@ -150,7 +155,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 },
               ),
               TextFormField(
-                initialValue: _formData['description'] as String,
+                initialValue: _formData['description'] as String?,
                 decoration: InputDecoration(labelText: 'Descrição'),
                 keyboardType: TextInputType.multiline,
                 maxLines: 3,
