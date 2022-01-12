@@ -40,6 +40,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
         _imageUrlController.text = _formData['imageUrl'] as String;
       } else {
         _formData['price'] = '';
+        _formData['id'] = '';
       }
     }
   }
@@ -90,7 +91,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
     final products = Provider.of<Products>(context, listen: false);
 
-    if (_formData['id'] == null) {
+    if (_formData['id'] == '') {
       products.addProduct(product);
     } else {
       products.updateProduct(product);
