@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_final_fields, unnecessary_null_comparison
 
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:appshoes/data/dummy_data.dart';
 import 'package:appshoes/providers/product.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_collection_literals, prefer_final_fields
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_collection_literals, prefer_final_fields, prefer_void_to_null, deprecated_member_use
 
 import 'package:appshoes/providers/product.dart';
 import 'package:appshoes/providers/products.dart';
@@ -97,7 +97,23 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     final products = Provider.of<Products>(context, listen: false);
 
     if (_formData['id'] == '') {
-      products.addProduct(product).then((_) {
+      products.addProduct(product).catchError((error) {
+        return showDialog<Null>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text('Ocorreu um erro!'),
+            content: Text('Contate o desenvolvedor'),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Ok'),
+              ),
+            ],
+          ),
+        );
+      }).then((_) {
         setState(() {
           _isLoading = false;
         });
