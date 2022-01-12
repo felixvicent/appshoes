@@ -21,11 +21,11 @@ class Products with ChangeNotifier {
     return _items.where((product) => product.isFavorite).toList();
   }
 
-  void addProduct(Product newProduct) {
+  Future<void> addProduct(Product newProduct) {
     const url =
         'https://appshoes-b3106-default-rtdb.firebaseio.com/products.json';
 
-    post(
+    return post(
       Uri.parse(url),
       body: json.encode({
         'title': newProduct.title,
