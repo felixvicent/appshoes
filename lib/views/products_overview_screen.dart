@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, import_of_legacy_library_into_null_safe, constant_identifier_names, unused_local_variable, deprecated_member_use
 
 import 'package:appshoes/providers/cart.dart';
+import 'package:appshoes/providers/products.dart';
 import 'package:appshoes/utils/app_routes.dart';
 import 'package:appshoes/widgets/app_drawer.dart';
 import 'package:appshoes/widgets/badge.dart';
@@ -20,6 +21,12 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   bool _showFavoriteOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<Products>(context, listen: false).loadProducts();
+  }
 
   @override
   Widget build(BuildContext context) {

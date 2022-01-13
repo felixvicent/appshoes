@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class Products with ChangeNotifier {
+  final String _url =
+      'https://appshoes-b3106-default-rtdb.firebaseio.com/products.json';
   List<Product> _items = DUMMY_PRODUCTS;
 
   List<Product> get items => [..._items];
@@ -20,12 +22,13 @@ class Products with ChangeNotifier {
     return _items.where((product) => product.isFavorite).toList();
   }
 
-  Future<void> addProduct(Product newProduct) async {
-    const url =
-        'https://appshoes-b3106-default-rtdb.firebaseio.com/products.json';
+  Future<void> loadProducts() async {
+    final response = await get(Uri.parse(_url));
+  }
 
+  Future<void> addProduct(Product newProduct) async {
     final response = await post(
-      Uri.parse(url),
+      Uri.parse(_url),
       body: json.encode({
         'title': newProduct.title,
         'description': newProduct.description,
