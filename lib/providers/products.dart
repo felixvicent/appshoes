@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_final_fields, unnecessary_null_comparison
+// ignore_for_file: prefer_final_fields, unnecessary_null_comparison, prefer_const_constructors
 
 import 'dart:convert';
 
+import 'package:appshoes/exceptions/http_exception.dart';
 import 'package:appshoes/providers/product.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -103,7 +104,8 @@ class Products with ChangeNotifier {
       if (response.statusCode >= 400) {
         _items.insert(index, product);
         notifyListeners();
-      } else {}
+        throw HttpException('Ocorreu um erro na exclusão do produto.');
+      }
     }
   }
 }

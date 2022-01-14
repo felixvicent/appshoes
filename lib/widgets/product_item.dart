@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, sized_box_for_whitespace, deprecated_member_use
 
+import 'package:appshoes/exceptions/http_exception.dart';
 import 'package:appshoes/providers/product.dart';
 import 'package:appshoes/providers/products.dart';
 import 'package:appshoes/utils/app_routes.dart';
@@ -13,6 +14,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scaffold = Scaffold.of(context);
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: NetworkImage(product.imageUrl),
@@ -50,10 +52,16 @@ class ProductItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                ).then((value) {
+                ).then((value) async {
                   if (value) {
-                    Provider.of<Products>(context, listen: false)
-                        .deleteProduct(product.id);
+                    try {
+                      await Provider.of<Products>(context, listen: false)
+                          .deleteProduct(product.id);
+                    } on HttpException catch (error) {
+                      scaffold.showSnackBar(
+                        SnackBar(content: Text(error.toString())),
+                      );
+                    }
                   }
                 });
               },
