@@ -25,6 +25,8 @@ class Products with ChangeNotifier {
     final response = await get(Uri.parse(_url));
     Map<String, dynamic> data = json.decode(response.body);
 
+    _items.clear();
+
     if (data != null) {
       data.forEach((productId, productData) {
         _items.add(Product(
