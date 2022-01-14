@@ -90,12 +90,20 @@ class Products with ChangeNotifier {
     }
   }
 
-  void deleteProduct(String id) {
+  Future<void> deleteProduct(String id) async {
     final index = _items.indexWhere((product) => product.id == id);
 
     if (index >= 0) {
-      _items.removeWhere((product) => product.id == id);
+      final product = _items[index];
+      _items.remove(product);
       notifyListeners();
+
+      final response = await delete(Uri.parse("$_baseUrl/${product.id}.json"));
+
+      if (response.statusCode >= 400) {
+        _items.insert(index, product);
+        notifyListeners();
+      } else {}
     }
   }
 }
