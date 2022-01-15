@@ -4,6 +4,7 @@ import 'package:appshoes/providers/cart.dart';
 import 'package:appshoes/providers/orders.dart';
 import 'package:appshoes/providers/products.dart';
 import 'package:appshoes/utils/app_routes.dart';
+import 'package:appshoes/views/auth_screen.dart';
 import 'package:appshoes/views/cart_screen.dart';
 import 'package:appshoes/views/orders_screen.dart';
 import 'package:appshoes/views/product_detail_screen.dart';
@@ -39,8 +40,9 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.deepOrange,
           fontFamily: 'Lato',
         ),
-        home: ProductsOverviewScreen(),
         routes: {
+          AppRoutes.AUTH: (ctx) => AuthScreen(),
+          AppRoutes.HOME: (ctx) => ProductsOverviewScreen(),
           AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen(),
           AppRoutes.CART: (ctx) => CartScreen(),
           AppRoutes.ORDERS: (ctx) => OrderScreen(),
