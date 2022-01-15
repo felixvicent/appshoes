@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:appshoes/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -30,8 +31,7 @@ class Product with ChangeNotifier {
   Future<void> toggleFavorite() async {
     _toggleFavorite();
     try {
-      final url =
-          'https://appshoes-b3106-default-rtdb.firebaseio.com/products/$id.json';
+      final url = '${Constants.BASE_API_URL}/products/$id.json';
 
       final response = await patch(
         Uri.parse(url),

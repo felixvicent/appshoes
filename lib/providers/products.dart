@@ -4,12 +4,12 @@ import 'dart:convert';
 
 import 'package:appshoes/exceptions/http_exception.dart';
 import 'package:appshoes/providers/product.dart';
+import 'package:appshoes/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class Products with ChangeNotifier {
-  final String _baseUrl =
-      'https://appshoes-b3106-default-rtdb.firebaseio.com/products';
+  final String _baseUrl = '${Constants.BASE_API_URL}/products';
   List<Product> _items = [];
 
   List<Product> get items => [..._items];

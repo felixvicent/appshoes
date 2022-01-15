@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:appshoes/providers/cart.dart';
+import 'package:appshoes/utils/constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 
@@ -21,8 +22,7 @@ class Order {
 }
 
 class Orders with ChangeNotifier {
-  final String _baseUrl =
-      'https://appshoes-b3106-default-rtdb.firebaseio.com/orders';
+  final String _baseUrl = '${Constants.BASE_API_URL}/orders';
 
   List<Order> _items = [];
 
