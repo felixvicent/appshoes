@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:appshoes/widgets/auth_card.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -29,6 +30,7 @@ class AuthScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
+                  margin: EdgeInsets.only(bottom: 20),
                   padding: EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 70,
@@ -53,7 +55,8 @@ class AuthScreen extends StatelessWidget {
                       fontFamily: 'Anton',
                     ),
                   ),
-                )
+                ),
+                AuthCard(),
               ],
             ),
           ),
