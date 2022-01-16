@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_final_fields, deprecated_member_use
 
+import 'package:appshoes/exceptions/auth_exception.dart';
 import 'package:appshoes/providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,24 @@ class _AuthCardState extends State<AuthCard> {
   final Map<String, String> _authData = {'email': '', 'password': ''};
   final _passwordController = TextEditingController();
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Ocorreu um erro!'),
+        content: Text(message),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Fechar'),
+          )
+        ],
+      ),
+    );
+  }
+
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) {
       return;
@@ -33,12 +52,17 @@ class _AuthCardState extends State<AuthCard> {
 
     Auth auth = Provider.of(context, listen: false);
 
-    if (_authMode == AuthMode.Login) {
-      await auth.login(_authData['email'], _authData['password']);
-    } else {
-      await auth.signup(_authData['email'], _authData['password']);
+    try {
+      if (_authMode == AuthMode.Login) {
+        await auth.login(_authData['email'], _authData['password']);
+      } else {
+        await auth.signup(_authData['email'], _authData['password']);
+      }
+    } on AuthException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog("Ocorreu um erro inesperado");
     }
-
     setState(() {
       _isLoading = false;
     });
