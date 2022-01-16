@@ -34,6 +34,7 @@ class _AuthCardState extends State<AuthCard> {
     Auth auth = Provider.of(context, listen: false);
 
     if (_authMode == AuthMode.Login) {
+      await auth.login(_authData['email'], _authData['password']);
     } else {
       await auth.signup(_authData['email'], _authData['password']);
     }
