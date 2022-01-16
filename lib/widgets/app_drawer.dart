@@ -44,7 +44,7 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
             onTap: () {
-              Provider.of<Auth>(context, listen: false).logot();
+              Provider.of<Auth>(context, listen: false).logout();
             },
           ),
         ],

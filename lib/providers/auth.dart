@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison, avoid_init_to_null
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:appshoes/exceptions/auth_exception.dart';
@@ -10,6 +11,7 @@ class Auth with ChangeNotifier {
   String? _token = null;
   String? _userId;
   DateTime? _expiryDate = null;
+  Timer? _logoutTimer = null;
 
   bool get isAuth {
     return token != null;
@@ -56,6 +58,8 @@ class Auth with ChangeNotifier {
         ),
       );
 
+      _autoLogout();
+
       notifyListeners();
     }
 
@@ -70,10 +74,24 @@ class Auth with ChangeNotifier {
     return _authenticate(email, password, 'signInWithPassword');
   }
 
-  void logot() {
+  void logout() {
     _token = null;
     _userId = null;
     _expiryDate = null;
+
+    if (_logoutTimer != null) {
+      _logoutTimer!.cancel();
+      _logoutTimer = null;
+    }
     notifyListeners();
+  }
+
+  void _autoLogout() {
+    if (_logoutTimer != null) {
+      _logoutTimer!.cancel();
+    }
+
+    final timeToLogout = _expiryDate!.difference(DateTime.now()).inSeconds;
+    _logoutTimer = Timer(Duration(seconds: timeToLogout), logout);
   }
 }
