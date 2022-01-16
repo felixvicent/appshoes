@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, avoid_init_to_null
+
 import 'dart:convert';
 
 import 'package:appshoes/exceptions/auth_exception.dart';
@@ -5,6 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class Auth with ChangeNotifier {
+  String? _token = null;
+  DateTime? _expiryDate = null;
+
+  bool get isAuth {
+    return token != null;
+  }
+
+  String? get token {
+    if (_token != null &&
+        _expiryDate != null &&
+        _expiryDate!.isAfter(DateTime.now())) {
+      return _token;
+    } else {
+      return null;
+    }
+  }
+
   Future<void> _authenticate(
       String? email, String? password, String urlSegment) async {
     final url =
@@ -23,6 +42,15 @@ class Auth with ChangeNotifier {
 
     if (responseBody['error'] != null) {
       throw AuthException(responseBody['error']['message']);
+    } else {
+      _token = responseBody["idToken"];
+      _expiryDate = DateTime.now().add(
+        Duration(
+          seconds: int.parse(responseBody['expiresIn']),
+        ),
+      );
+
+      notifyListeners();
     }
 
     return Future.value();

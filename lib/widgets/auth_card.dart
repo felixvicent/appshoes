@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_final_fields, deprecated_member_use
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_final_fields, deprecated_member_use, constant_identifier_names
 
 import 'package:appshoes/exceptions/auth_exception.dart';
 import 'package:appshoes/providers/auth.dart';
