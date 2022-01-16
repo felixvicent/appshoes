@@ -6,12 +6,10 @@ import 'package:appshoes/providers/orders.dart';
 import 'package:appshoes/providers/products.dart';
 import 'package:appshoes/utils/app_routes.dart';
 import 'package:appshoes/views/auth_home_screen.dart';
-import 'package:appshoes/views/auth_screen.dart';
 import 'package:appshoes/views/cart_screen.dart';
 import 'package:appshoes/views/orders_screen.dart';
 import 'package:appshoes/views/product_detail_screen.dart';
 import 'package:appshoes/views/product_form_screen.dart';
-import 'package:appshoes/views/products_overview_screen.dart';
 import 'package:appshoes/views/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +36,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => Cart(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => Orders(),
+        ChangeNotifierProxyProvider<Auth, Orders>(
+          create: (_) => Orders(null, []),
+          update: (ctx, auth, previousOrders) => Orders(
+            auth.token,
+            previousOrders!.items,
+          ),
         ),
       ],
       child: MaterialApp(

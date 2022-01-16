@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, deprecated_member_use
 
+import 'package:appshoes/providers/auth.dart';
 import 'package:appshoes/providers/cart.dart';
 import 'package:appshoes/providers/product.dart';
 import 'package:appshoes/utils/app_routes.dart';
@@ -11,6 +12,8 @@ class ProductGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final Product product = Provider.of<Product>(context, listen: false);
     final Cart cart = Provider.of<Cart>(context, listen: false);
+    final Auth auth = Provider.of(context, listen: false);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -30,7 +33,7 @@ class ProductGridItem extends StatelessWidget {
           backgroundColor: Colors.black87,
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
-              onPressed: product.toggleFavorite,
+              onPressed: () => product.toggleFavorite(auth.token),
               icon: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border,
               ),
