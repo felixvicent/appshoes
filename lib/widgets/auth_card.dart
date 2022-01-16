@@ -1,6 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_final_fields, deprecated_member_use
 
+import 'package:appshoes/providers/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -18,7 +20,7 @@ class _AuthCardState extends State<AuthCard> {
   final Map<String, String> _authData = {'email': '', 'password': ''};
   final _passwordController = TextEditingController();
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_form.currentState!.validate()) {
       return;
     }
@@ -29,8 +31,12 @@ class _AuthCardState extends State<AuthCard> {
 
     _form.currentState!.save();
 
+    Auth auth = Provider.of(context, listen: false);
+
     if (_authMode == AuthMode.Login) {
-    } else {}
+    } else {
+      await auth.signup(_authData['email'], _authData['password']);
+    }
 
     setState(() {
       _isLoading = false;

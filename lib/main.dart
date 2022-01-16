@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 
+import 'package:appshoes/providers/auth.dart';
 import 'package:appshoes/providers/cart.dart';
 import 'package:appshoes/providers/orders.dart';
 import 'package:appshoes/providers/products.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => Orders(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => Auth(),
+        )
       ],
       child: MaterialApp(
         title: 'Minha Loja',
